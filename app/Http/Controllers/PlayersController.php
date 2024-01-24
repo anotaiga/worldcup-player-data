@@ -27,6 +27,13 @@
             $player = Player::find($player_id);
             return view('players.detail',['player'=> $player]);
         }
+
+        public function reindex()
+        {
+            $playerTable = new Player;
+            $players = $playerTable->allPlayer();
+            return view('players.index', ['players' => $players]);
+        }
     }
 
 

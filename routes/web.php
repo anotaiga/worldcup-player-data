@@ -28,6 +28,11 @@ Route::get('/index', [PlayersController::class,'index'])->name('index');
 // Route::post('/process-button-click', [PlayersController::class,'detail'])->name('button.click');
 Route::get('/detail/{player_id}',[PlayersController::class,'detail'])->name('player.detail');
 
+Route::get('/detail',[PlayersController::class,'reindex'])->name('reindex');
+
+// routes/web.php
+
+
 
 
 Route::get('/player/{id}',[PlayersController::class,'player'])->name('player');

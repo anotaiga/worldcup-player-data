@@ -1,3 +1,15 @@
+<?php
+$referer = @$_SERVER['HTTP_REFERER'];
+
+if (empty($referer)) {
+    // リダイレクトの場合
+    header(("Location: ../index"));
+}
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -72,6 +84,7 @@
             </tr>
         </table>
     </div>
+    <div class="back_button"><a href="{{ route('reindex') }}">戻る</a></div>
 </body>
 </html>
 
