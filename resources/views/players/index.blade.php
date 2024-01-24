@@ -64,9 +64,11 @@
     .table-container{
         border: 2px solid black;
     }
-    li{
+    ul{
         display: flex;
         justify-content: center;
+    }
+    li{
         list-style:none;
     }
 </style>
