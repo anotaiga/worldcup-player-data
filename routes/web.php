@@ -22,17 +22,27 @@ use App\Http\Controllers\PlayersController;
 //     return view('players/index');
 // });
 
+//indexのルーディング
 Route::get('/index', [PlayersController::class,'index'])->name('index');
-// Route::get('/detail/{id}',[PlayersController::class,'detail'])->name('detail');
+Route::get('/index1/{player_id}',[PlayersController::class,'index1'])->name('player.index1');
 
-// Route::post('/process-button-click', [PlayersController::class,'detail'])->name('button.click');
+//detailのルーディング
 Route::get('/detail/{player_id}',[PlayersController::class,'detail'])->name('player.detail');
 
+//ダイレクトアクセス禁止
 Route::get('/detail',[PlayersController::class,'reindex'])->name('reindex');
 
-// routes/web.php
+
+Route::get('/update/{player_id}',[PlayersController::class,'update'])->name('player.update');
+
+Route::get('/edit/{player_id}',[PlayersController::class,'edit'])->name('player.edit');
+
+Route::get('/show/{player_id}',[PlayersController::class,'show'])->name('player.show');
 
 
+Route::get('/delete/{player_id}',[PlayersController::class,'delete'])->name('player.delete');
+
+//戻るボタン
+Route::get('/back-to-index', [PlayersController::class, 'backToIndex']);
 
 
-Route::get('/player/{id}',[PlayersController::class,'player'])->name('player');

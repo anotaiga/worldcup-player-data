@@ -1,15 +1,12 @@
 <?php
-$referer = @$_SERVER['HTTP_REFERER'];
+    $referer = @$_SERVER['HTTP_REFERER'];
 
-if (empty($referer)) {
-    // リダイレクトの場合
-    header(("Location: ../index"));
-}
+    if (empty($referer)) {
+        // リダイレクトの場合
+        header(("Location: ../index1/1"));
+    }
+
 ?>
-
-
-
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -18,32 +15,63 @@ if (empty($referer)) {
     <title>Document</title>
 </head>
 <body>
-    <style>
-        table{
+<style>
+    table {
+        border-collapse: collapse;
             width: 100%;
-            height: 60px;
-            table-layout: fixed;
-            text-align: center;
-            border-collapse: collapse;
-        }
-        
-        td {
-            border: 2px solid white;
-            text-align: center;
-            padding: 8px;
-        }
-        tr:nth-child(odd) td {
-        background-color: #f2f2f2; /* 奇数行の背景色を白に設定 */
-        }
+            height:60px;
+            /* white-space:nowrap; */
+            /* background: #eee; */
+            text-align:center;
+    }
 
-        tr:nth-child(even) td {
-        background-color: #fff; /* 偶数行の背景色を灰色に設定 */
-        }
+    th, td {
+        border: 2px solid white;
+        text-align: center;
+        padding: 8px;
+    }
 
-    </style>
-    <div class="A" style="display:flex">
+
+    th {
+    }
+
+    tbody tr:nth-child(even) td {
+        background-color: white;
+    }
+
+    .even-row tr {
+        background-color: #f2f2f2; /* 偶数行の背景色を灰色に設定 */
+    }
+
+    td.detail_button a {
+        display: block;
+        text-align: center;
+    }
+    .table-container{
+        border: 2px solid black;
+        background-color: #f2f2f2;
+
+    }
+    ul{
+        display: flex;
+        justify-content: center;
+    }
+    li{
+        list-style:none;
+    }
+    .back_button{
+        background-color:black;
+        color:white;
+        weight:500px;
+        margin: 0 auto;
+        text-align:center;
+    }
+</style>
+
+<div class="table-container">
         <table border="3" >
-            <tr>
+            
+        <tr>
                 <td>No</td>
                 <td>{{ $player->id }}</td>
             </tr>
@@ -64,10 +92,15 @@ if (empty($referer)) {
             </tr>
             
             <tr>
+                <td>国</td>
+                <td>{{ $player->my_country_name }}</td>
+            </tr>
+
+            <tr>
                 <td>所属</td>
                 <td>{{ $player ? $player->club : 'N/A' }}</td>
             </tr>
-            
+
             <tr>
                 <td>誕生日</td>
                 <td>{{ $player ? $player->birth : 'N/A' }}</td>
@@ -82,10 +115,36 @@ if (empty($referer)) {
                 <td>体重</td>
                 <td>{{ $player ? $player->weight : 'N/A' }}</td>
             </tr>
+
+            <tr>
+                <td>総得点</td>
+                <td>
+                    @if($goals->count()>0)
+                    {{ $goals->count()}}点
+                    @else
+                    無得点です。
+                    @endif
+                </td>
+            </tr>
+
+            <tr>
+                <td>得点履歴</td>
+                <td>
+                    @if($goals->count()>0)
+                    @foreach($goals->sortBy('kickoff') as $goal)
+                    {{ $goal->kickoff }}開始{{ $goal->enemy_country }}戦{{ $goal->goal_time }}
+                    @if(!$loop->last)
+                    <br>
+                    @endif
+                    @endforeach
+                    @else
+                    {{--無--}}
+                    @endif
+                </td>
+            </tr>
         </table>
     </div>
-    <div class="back_button"><a href="{{ route('reindex') }}">戻る</a></div>
+    <div class="back_button" ><a href="{{ url('/back-to-index') }}" class="btn btn-primary">戻る</a></div>
+
 </body>
 </html>
-
-
