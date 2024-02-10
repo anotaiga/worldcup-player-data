@@ -1,25 +1,36 @@
-
 <?php
-    
-    namespace App\Models;
+namespace App\Models;
 
-    use Illuminate\Database\Eloquent\Factories\HasFactory;
-    use Illuminate\Database\Eloquent\Model;
-    // use Illuminate\Database\Eloquent\DB;
+use Illuminate\Database\Eloquent\Model;
 
-    class Player extends Model
-    {
-        use HasFactory;
+class Country extends Model
+{
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'countries';
 
-        public function allPlayer(){
-            $players = Player::all();
-            // return $players;
-            return Player::paginate(20);
-        }
-        
-        public function country()
-        {
-            return $this->belongsTo(Country::class, 'country_id');
-        }
-    }
-?>
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name', // Replace with the actual columns in your 'countries' table
+        // Add other columns as needed
+    ];
+
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
+
+    // Add any additional methods or relationships as needed
+}

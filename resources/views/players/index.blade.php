@@ -3,8 +3,9 @@
 
     if (empty($referer)) {
         // リダイレクトの場合
-        header(("Location: ../index1/1"));
+        header(("Location: ../login"));
     }
+
 ?>
 
 

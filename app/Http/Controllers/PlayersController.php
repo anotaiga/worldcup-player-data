@@ -6,6 +6,7 @@
     use App\Models\Player;
     use Illuminate\Support\Facades\DB;
     use App\Http\Requests\FormRequest;
+    use Illuminate\Support\Facades\Auth;
 
 
     class PlayersController extends Controller
@@ -39,6 +40,24 @@
 
                 return view('players.index1', ['result' => $result, 'player' => $player]);
         }
+
+        public function index2($player_id)
+        {
+            
+    $user = Auth::user(); 
+                $result = DB::table('players')
+                ->join('countries', 'players.country_id', '=', 'countries.id')
+                ->select('players.*', 'countries.name as country_name')
+                ->where('players.del_fig', '=', 0)
+                ->where('players.country_id', '=', $user->country_id)
+                ->paginate(20);
+                
+        
+                $player = Player::find($player_id);
+
+                return view('players.index2', ['result' => $result, 'player' => $player]);
+        }
+        
         
 
         public function reindex()
@@ -59,6 +78,15 @@
             $player = $playersCountry->selectPlayer($player_id);
             $goals = $goal->selectGoals($player_id);
             return view('players.detail',['player'=>$player,'goals'=>$goals]);
+        }
+        
+        public function detail2($player_id)
+        {
+            $playersCountry = new Player;
+            $goal = new Player;
+            $player = $playersCountry->selectPlayer($player_id);
+            $goals = $goal->selectGoals($player_id);
+            return view('players.detail2',['player'=>$player,'goals'=>$goals]);
         }
         
 
@@ -82,7 +110,13 @@
             return redirect('index1/1');
         }
 
-
+        public function backToIndex2(Request $request, $country_id)
+        {
+            // ここで $country_id を使用して必要な処理を行う
+    dd($country_id);
+            // 例えば、$country_id をビューに渡して表示するなど
+            return view('players.index2', ['country_id' => $country_id]);
+        }
 
         public function update(Request $request, $player_id)
         {

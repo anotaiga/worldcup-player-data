@@ -145,7 +145,16 @@
             </tr>
         </table>
     </div>
-    <div class="back_button" ><a href="{{ url('/back-to-index') }}" class="btn btn-primary">戻る</a></div>
 
+
+<div class="back_button">
+    <button onclick="goBack()" class="btn btn-primary">前のページに戻る</button>
+</div>
+
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
 </body>
 </html>

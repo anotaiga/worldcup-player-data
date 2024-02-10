@@ -6,9 +6,7 @@
         header(("Location: ../login"));
     }
 
-
 ?>
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>

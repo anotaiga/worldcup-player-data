@@ -6,6 +6,7 @@
         header(("Location: ../login"));
     }
 
+
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -81,11 +82,9 @@
     .a{
         text-align: right;
     }
-
 </style>
 
 <div class="a"><button class="logout" href="{{ url('/back-to-login') }}">ログアウト</button></div>
-
 <div class="table-container">
 
     <table>
@@ -99,8 +98,6 @@
             <th width="10%">誕生日</th>
             <th>身長</th>
             <th>体重</th>
-            <th></th>
-            <th></th>
             <th></th>
         </tr>
     </table>
@@ -116,9 +113,7 @@
             <td width="10%">{{ $player -> birth}}</td>
             <td>{{ $player -> height}}</td>
             <td>{{ $player -> weight}}</td>
-            <td class="detail_button"><a href="{{  route('player.detail',['player_id'=>$player->id]) }}">詳細</a></td>
-            <td class="update_button"><a href="{{  route('player.edit',['player_id'=>$player->id])  }}">編集</td>
-            <td class="delete_button"><a href="{{  route('player.delete',['player_id'=>$player->id])  }}" onclick="return confirm('本当に削除しますか？')">削除</td>
+            <td class="detail_button"><a href="{{  route('player.detail2',['player_id'=>$player->id]) }}">詳細</a></td>
         
         </tr>
     @endforeach
