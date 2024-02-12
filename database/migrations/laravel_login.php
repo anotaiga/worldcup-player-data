@@ -25,19 +25,19 @@ return new class extends Migration
         Schema::dropIfExists('users');
     }
     
-    public function up(): void
-    {
-        Schema::table('users', function (Blueprint $table) {
-            // デフォルト値を変更し、1または0のみを許可
-            $table->integer('role')->default(0)->nullable(false)->change();
-            $table->checkIndex(['role'], 'role_check')->where('role', '=', 0)->orWhere('role', '=', 1);
-        });
-    }
+    // public function up(): void
+    // {
+    //     Schema::table('users', function (Blueprint $table) {
+    //         // デフォルト値を変更し、1または0のみを許可
+    //         $table->integer('role')->default(0)->nullable(false)->change();
+    //         $table->checkIndex(['role'], 'role_check')->where('role', '=', 0)->orWhere('role', '=', 1);
+    //     });
+    // }
 
-    public function down()
-    {
-        Schema::dropIfExists('users');
-    }
+    // public function down()
+    // {
+    //     Schema::dropIfExists('users');
+    // }
 };
 
 ?>

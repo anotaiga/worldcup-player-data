@@ -32,7 +32,7 @@
                 $result = DB::table('players')
                 ->join('countries', 'players.country_id', '=', 'countries.id')
                 ->select('players.*', 'countries.name as country_name')
-                ->where('players.del_fig', '=', 0)
+                ->where('players.del_flg', '=', 0)
                 ->paginate(20);
                 
         
@@ -48,7 +48,7 @@
                 $result = DB::table('players')
                 ->join('countries', 'players.country_id', '=', 'countries.id')
                 ->select('players.*', 'countries.name as country_name')
-                ->where('players.del_fig', '=', 0)
+                ->where('players.del_flg', '=', 0)
                 ->where('players.country_id', '=', $user->country_id)
                 ->paginate(20);
                 
@@ -192,7 +192,7 @@
                 }
 
                 // 論理削除
-                $player->del_fig=$player->del_fig ? 0 : 1;
+                $player->del_flg=$player->del_flg ? 0 : 1;
                 $player->save();
             }
             return redirect('index1/1');
